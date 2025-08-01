@@ -36,6 +36,39 @@ O projeto não estava inicializado como repositório Git ou não tinha a branch 
    git commit -m "Initial commit: Freelance Manager with Coolify deploy configuration"
    ```
 
+## ❌ Erro: "No url found for submodule path 'api' in .gitmodules"
+
+### Problema
+```
+sed: /artifacts/xxx/.gitmodules: No such file or directory
+fatal: No url found for submodule path 'api' in .gitmodules
+```
+
+### Causa
+A pasta `api` foi registrada como submódulo Git (modo 160000) mas não há arquivo `.gitmodules` configurado.
+
+### ✅ Solução Aplicada
+
+1. **Removido referência ao submódulo:**
+   ```bash
+   git rm --cached api
+   ```
+
+2. **Adicionado arquivos da API como parte do projeto:**
+   ```bash
+   git add api/
+   ```
+
+3. **Commitado a correção:**
+   ```bash
+   git commit -m "Fix: Remove api submodule reference and add api files directly"
+   ```
+
+4. **Enviado para repositório remoto:**
+   ```bash
+   git push origin main
+   ```
+
 ### 📋 Próximos Passos para Deploy
 
 1. **Criar repositório no GitHub/GitLab:**
