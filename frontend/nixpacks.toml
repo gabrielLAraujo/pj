@@ -1,0 +1,22 @@
+# Nixpacks configuration for Freelance Manager Frontend
+
+[variables]
+NODE_VERSION = "18"
+NPM_CONFIG_PRODUCTION = "false"
+GENERATE_SOURCEMAP = "false"
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = [
+  "npm ci"
+]
+
+[phases.build]
+cmds = [
+  "npm run build"
+]
+
+[staticAssets]
+publicDir = "build"

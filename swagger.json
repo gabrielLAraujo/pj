@@ -1,0 +1,597 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/work-schedule": {
+      "post": {
+        "operationId": "WorkScheduleController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkScheduleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Agenda criada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkSchedule"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Criar uma nova agenda de trabalho",
+        "tags": [
+          "work-schedule"
+        ]
+      },
+      "get": {
+        "operationId": "WorkScheduleController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de agendas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkSchedule"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar todas as agendas de trabalho",
+        "tags": [
+          "work-schedule"
+        ]
+      }
+    },
+    "/work-schedule/{id}": {
+      "get": {
+        "operationId": "WorkScheduleController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agenda encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkSchedule"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar agenda por ID",
+        "tags": [
+          "work-schedule"
+        ]
+      },
+      "patch": {
+        "operationId": "WorkScheduleController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkScheduleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agenda atualizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkSchedule"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Atualizar agenda",
+        "tags": [
+          "work-schedule"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkScheduleController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agenda removida"
+          }
+        },
+        "summary": "Remover agenda",
+        "tags": [
+          "work-schedule"
+        ]
+      }
+    },
+    "/work-schedule-day": {
+      "post": {
+        "operationId": "WorkScheduleDayController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkScheduleDayDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dia da semana criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkScheduleDay"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Criar um novo dia da agenda",
+        "tags": [
+          "work-schedule-day"
+        ]
+      },
+      "get": {
+        "operationId": "WorkScheduleDayController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de dias da semana",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkScheduleDay"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar todos os dias da agenda",
+        "tags": [
+          "work-schedule-day"
+        ]
+      }
+    },
+    "/work-schedule-day/work-schedule/{workScheduleId}": {
+      "get": {
+        "operationId": "WorkScheduleDayController_findByWorkScheduleId",
+        "parameters": [
+          {
+            "name": "workScheduleId",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dias da semana da agenda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkScheduleDay"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar dias por agenda",
+        "tags": [
+          "work-schedule-day"
+        ]
+      }
+    },
+    "/work-schedule-day/{id}": {
+      "get": {
+        "operationId": "WorkScheduleDayController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do dia",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dia encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkScheduleDay"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar dia por ID",
+        "tags": [
+          "work-schedule-day"
+        ]
+      },
+      "patch": {
+        "operationId": "WorkScheduleDayController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do dia",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkScheduleDayDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dia da semana atualizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkScheduleDay"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Atualizar dia",
+        "tags": [
+          "work-schedule-day"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkScheduleDayController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do dia",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dia removido"
+          }
+        },
+        "summary": "Remover dia",
+        "tags": [
+          "work-schedule-day"
+        ]
+      }
+    },
+    "/forecast/generate": {
+      "post": {
+        "operationId": "ForecastController_generateForecast",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateForecastDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Previsão gerada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forecast"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Gerar previsão mensal de trabalho",
+        "tags": [
+          "forecast"
+        ]
+      }
+    },
+    "/forecast": {
+      "get": {
+        "operationId": "ForecastController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de previsões",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Forecast"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar todas as previsões",
+        "tags": [
+          "forecast"
+        ]
+      }
+    },
+    "/forecast/{id}": {
+      "get": {
+        "operationId": "ForecastController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da previsão",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Previsão encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forecast"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar previsão por ID",
+        "tags": [
+          "forecast"
+        ]
+      }
+    },
+    "/forecast/work-schedule/{workScheduleId}": {
+      "get": {
+        "operationId": "ForecastController_findByWorkSchedule",
+        "parameters": [
+          {
+            "name": "workScheduleId",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda de trabalho",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Previsões da agenda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Forecast"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar previsões por agenda de trabalho",
+        "tags": [
+          "forecast"
+        ]
+      }
+    },
+    "/user/create": {
+      "post": {
+        "operationId": "UserController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new user",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Work Schedule API",
+    "description": "API para gerenciamento de agendas de trabalho",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "work-schedule",
+      "description": "Operações relacionadas às agendas de trabalho"
+    },
+    {
+      "name": "work-schedule-day",
+      "description": "Operações relacionadas aos dias da agenda"
+    },
+    {
+      "name": "forecast",
+      "description": "Operações relacionadas às previsões mensais"
+    },
+    {
+      "name": "user",
+      "description": "Operações relacionadas aos usuários"
+    },
+    {
+      "name": "auth",
+      "description": "Operações de autenticação e autorização"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateWorkScheduleDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "WorkSchedule": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateWorkScheduleDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateWorkScheduleDayDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "WorkScheduleDay": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateWorkScheduleDayDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "GenerateForecastDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "Forecast": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "User": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

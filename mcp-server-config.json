@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "freelance-db": {
+      "command": "node",
+      "args": [
+        "./api/src/mcp-server.js"
+      ],
+      "env": {
+        "DATABASE_URL": "postgresql://postgres:YfXh92lOrjTsmiUr8UkfMhwvO1nEO7jYtAc0tpalO763TU6PHUqhM3sUg2KfKSwU@148.230.77.89:3000/postgres",
+        "NODE_ENV": "development"
+      }
+    }
+  }
+}

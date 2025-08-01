@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: freelance-postgres
+    environment:
+      POSTGRES_DB: freelance_manager
+      POSTGRES_USER: freelance_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-freelance_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - freelance-network
+    restart: unless-stopped
+
+  # Backend API
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: freelance-api
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://freelance_user:${POSTGRES_PASSWORD:-freelance_password}@postgres:5432/freelance_manager
+      JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3003}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - freelance-network
+    restart: unless-stopped
+    volumes:
+      - api_uploads:/app/uploads
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: ${REACT_APP_API_URL:-http://localhost:3000}
+        REACT_APP_GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+        REACT_APP_REDIRECT_URI: ${REACT_APP_REDIRECT_URI:-http://localhost:3003/auth/callback}
+    container_name: freelance-frontend
+    ports:
+      - "3003:80"
+    depends_on:
+      - api
+    networks:
+      - freelance-network
+    restart: unless-stopped
+
+  # Redis (opcional, para cache/sessions)
+  redis:
+    image: redis:7-alpine
+    container_name: freelance-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - freelance-network
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  api_uploads:
+    driver: local
+
+networks:
+  freelance-network:
+    driver: bridge
