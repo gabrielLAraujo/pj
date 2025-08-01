@@ -1,0 +1,26 @@
+# Nixpacks configuration for Freelance Manager API
+
+[variables]
+NODE_VERSION = "18"
+NPM_CONFIG_PRODUCTION = "false"
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = [
+  "npm ci",
+  "npx prisma generate"
+]
+
+[phases.build]
+cmds = [
+  "npm run build"
+]
+
+[start]
+cmd = "npm run start:prod"
+
+[staticAssets]
+# Serve static files if any
+# publicDir = "public"

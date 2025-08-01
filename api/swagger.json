@@ -1,0 +1,1914 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/projects": {
+      "post": {
+        "operationId": "ProjectController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "summary": "Create a new project",
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "operationId": "ProjectController_findAll",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Projects retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all projects for a user",
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/projects/{id}": {
+      "get": {
+        "operationId": "ProjectController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        },
+        "summary": "Get a specific project by ID",
+        "tags": [
+          "projects"
+        ]
+      },
+      "patch": {
+        "operationId": "ProjectController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Project updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        },
+        "summary": "Update a project",
+        "tags": [
+          "projects"
+        ]
+      },
+      "delete": {
+        "operationId": "ProjectController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project deleted successfully"
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        },
+        "summary": "Delete a project",
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/work-schedule": {
+      "post": {
+        "operationId": "WorkScheduleController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkScheduleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Agenda criada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkSchedule"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Criar uma nova agenda de trabalho",
+        "tags": [
+          "Work Schedule"
+        ]
+      },
+      "get": {
+        "operationId": "WorkScheduleController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de agendas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkSchedule"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar todas as agendas de trabalho",
+        "tags": [
+          "Work Schedule"
+        ]
+      }
+    },
+    "/work-schedule/{id}": {
+      "get": {
+        "operationId": "WorkScheduleController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agenda encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkSchedule"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar agenda por ID",
+        "tags": [
+          "Work Schedule"
+        ]
+      },
+      "patch": {
+        "operationId": "WorkScheduleController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkScheduleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agenda atualizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkSchedule"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Atualizar agenda",
+        "tags": [
+          "Work Schedule"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkScheduleController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agenda removida"
+          }
+        },
+        "summary": "Remover agenda",
+        "tags": [
+          "Work Schedule"
+        ]
+      }
+    },
+    "/work-schedule-day": {
+      "post": {
+        "operationId": "WorkScheduleDayController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkScheduleDayDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Dia da semana criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkScheduleDay"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Criar um novo dia da agenda",
+        "tags": [
+          "Work Schedule Day"
+        ]
+      },
+      "get": {
+        "operationId": "WorkScheduleDayController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de dias da semana",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkScheduleDay"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar todos os dias da agenda",
+        "tags": [
+          "Work Schedule Day"
+        ]
+      }
+    },
+    "/work-schedule-day/work-schedule/{workScheduleId}": {
+      "get": {
+        "operationId": "WorkScheduleDayController_findByWorkScheduleId",
+        "parameters": [
+          {
+            "name": "workScheduleId",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dias da semana da agenda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkScheduleDay"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar dias por agenda",
+        "tags": [
+          "Work Schedule Day"
+        ]
+      }
+    },
+    "/work-schedule-day/{id}": {
+      "get": {
+        "operationId": "WorkScheduleDayController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do dia",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dia encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkScheduleDay"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar dia por ID",
+        "tags": [
+          "Work Schedule Day"
+        ]
+      },
+      "patch": {
+        "operationId": "WorkScheduleDayController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do dia",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkScheduleDayDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dia da semana atualizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkScheduleDay"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Atualizar dia",
+        "tags": [
+          "Work Schedule Day"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkScheduleDayController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do dia",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dia removido"
+          }
+        },
+        "summary": "Remover dia",
+        "tags": [
+          "Work Schedule Day"
+        ]
+      }
+    },
+    "/work-logs": {
+      "post": {
+        "operationId": "WorkLogController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkLogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Work log created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkLog"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Project or task not found"
+          }
+        },
+        "summary": "Create a new work log entry",
+        "tags": [
+          "work-logs"
+        ]
+      },
+      "get": {
+        "operationId": "WorkLogController_findAll",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Work logs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkLog"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all work logs for a user",
+        "tags": [
+          "work-logs"
+        ]
+      }
+    },
+    "/work-logs/project/{projectId}/summary": {
+      "get": {
+        "operationId": "WorkLogController_getProjectSummary",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "required": false,
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "required": false,
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project summary retrieved successfully"
+          }
+        },
+        "summary": "Get project work summary",
+        "tags": [
+          "work-logs"
+        ]
+      }
+    },
+    "/work-logs/{id}": {
+      "get": {
+        "operationId": "WorkLogController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Work log retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkLog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Work log not found"
+          }
+        },
+        "summary": "Get a specific work log by ID",
+        "tags": [
+          "work-logs"
+        ]
+      },
+      "patch": {
+        "operationId": "WorkLogController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkLogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Work log updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkLog"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Work log not found"
+          }
+        },
+        "summary": "Update a work log",
+        "tags": [
+          "work-logs"
+        ]
+      },
+      "delete": {
+        "operationId": "WorkLogController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Work log deleted successfully"
+          },
+          "404": {
+            "description": "Work log not found"
+          }
+        },
+        "summary": "Delete a work log",
+        "tags": [
+          "work-logs"
+        ]
+      }
+    },
+    "/work-logs/reports/monthly": {
+      "get": {
+        "operationId": "WorkLogController_getMonthlyReport",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "required": true,
+            "in": "query",
+            "description": "Year (YYYY)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "month",
+            "required": true,
+            "in": "query",
+            "description": "Month (1-12)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monthly report retrieved successfully"
+          }
+        },
+        "summary": "Get monthly work log report",
+        "tags": [
+          "work-logs"
+        ]
+      }
+    },
+    "/work-logs/reports/export/excel": {
+      "get": {
+        "operationId": "WorkLogController_exportToExcel",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "required": true,
+            "in": "query",
+            "description": "Year (YYYY)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "month",
+            "required": true,
+            "in": "query",
+            "description": "Month (1-12)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Excel file generated successfully"
+          }
+        },
+        "summary": "Export monthly work logs to Excel",
+        "tags": [
+          "work-logs"
+        ]
+      }
+    },
+    "/work-logs/reports/export/pdf": {
+      "get": {
+        "operationId": "WorkLogController_exportToPdf",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "required": true,
+            "in": "query",
+            "description": "Year (YYYY)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "month",
+            "required": true,
+            "in": "query",
+            "description": "Month (1-12)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PDF file generated successfully"
+          }
+        },
+        "summary": "Export monthly work logs to PDF",
+        "tags": [
+          "work-logs"
+        ]
+      }
+    },
+    "/tasks": {
+      "post": {
+        "operationId": "TaskController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Project not found"
+          }
+        },
+        "summary": "Create a new task",
+        "tags": [
+          "tasks"
+        ]
+      },
+      "get": {
+        "operationId": "TaskController_findAll",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all tasks for a user",
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/tasks/by-status/{status}": {
+      "get": {
+        "operationId": "TaskController_getTasksByStatus",
+        "parameters": [
+          {
+            "name": "status",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "description": "Project ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get tasks by status",
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "operationId": "TaskController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        },
+        "summary": "Get a specific task by ID",
+        "tags": [
+          "tasks"
+        ]
+      },
+      "patch": {
+        "operationId": "TaskController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        },
+        "summary": "Update a task",
+        "tags": [
+          "tasks"
+        ]
+      },
+      "delete": {
+        "operationId": "TaskController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task deleted successfully"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        },
+        "summary": "Delete a task",
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/tasks/{id}/actual-hours": {
+      "patch": {
+        "operationId": "TaskController_updateActualHours",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task actual hours updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        },
+        "summary": "Update actual hours for a task",
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/forecast/generate": {
+      "post": {
+        "operationId": "ForecastController_generateForecast",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateForecastDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Previsão gerada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forecast"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Gerar previsão mensal de trabalho",
+        "tags": [
+          "Forecast"
+        ]
+      }
+    },
+    "/forecast": {
+      "get": {
+        "operationId": "ForecastController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de previsões",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Forecast"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Listar todas as previsões",
+        "tags": [
+          "Forecast"
+        ]
+      }
+    },
+    "/forecast/{id}": {
+      "get": {
+        "operationId": "ForecastController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID da previsão",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Previsão encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forecast"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar previsão por ID",
+        "tags": [
+          "Forecast"
+        ]
+      }
+    },
+    "/forecast/work-schedule/{workScheduleId}": {
+      "get": {
+        "operationId": "ForecastController_findByWorkSchedule",
+        "parameters": [
+          {
+            "name": "workScheduleId",
+            "required": true,
+            "in": "path",
+            "description": "ID da agenda de trabalho",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Previsões da agenda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Forecast"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Buscar previsões por agenda de trabalho",
+        "tags": [
+          "Forecast"
+        ]
+      }
+    },
+    "/user/create": {
+      "post": {
+        "operationId": "UserController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a new user",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "AuthController_register",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/github": {
+      "get": {
+        "operationId": "AuthController_getGitHubAuthUrl",
+        "parameters": [
+          {
+            "name": "redirect_uri",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/github/callback": {
+      "post": {
+        "operationId": "AuthController_handleGitHubCallback",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/google/callback": {
+      "post": {
+        "operationId": "AuthController_handleGoogleCallback",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/verify": {
+      "post": {
+        "operationId": "AuthController_verifyToken",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Work Schedule API",
+    "description": "API para gerenciamento de agendas de trabalho",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Work Schedule",
+      "description": "Operações relacionadas às agendas de trabalho"
+    },
+    {
+      "name": "Work Schedule Day",
+      "description": "Operações relacionadas aos dias da agenda"
+    },
+    {
+      "name": "Forecast",
+      "description": "Operações relacionadas às previsões mensais"
+    },
+    {
+      "name": "User",
+      "description": "Operações relacionadas aos usuários"
+    },
+    {
+      "name": "Auth",
+      "description": "Operações de autenticação e autorização"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Project name",
+            "example": "E-commerce Website"
+          },
+          "description": {
+            "type": "string",
+            "description": "Project description",
+            "example": "Building a modern e-commerce platform"
+          },
+          "hourlyRate": {
+            "type": "number",
+            "description": "Hourly rate for this project",
+            "example": 50
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code",
+            "default": "USD",
+            "example": "USD"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "COMPLETED",
+              "PAUSED",
+              "CANCELLED"
+            ],
+            "description": "Project status",
+            "default": "ACTIVE"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Project start date",
+            "example": "2024-01-15"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Project end date",
+            "example": "2024-06-15"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "name",
+          "hourlyRate",
+          "currency",
+          "status",
+          "userId"
+        ]
+      },
+      "Project": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateProjectDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateWorkScheduleDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "WorkSchedule": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateWorkScheduleDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateWorkScheduleDayDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "WorkScheduleDay": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateWorkScheduleDayDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateWorkLogDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date of work",
+            "example": "2024-01-15"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Start time of work",
+            "example": "2024-01-15T09:00:00Z"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "End time of work",
+            "example": "2024-01-15T17:00:00Z"
+          },
+          "hoursWorked": {
+            "type": "number",
+            "description": "Hours worked",
+            "example": 8
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of work done",
+            "example": "Implemented user authentication module"
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Task ID if work is related to a specific task"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "date",
+          "startTime",
+          "hoursWorked",
+          "description",
+          "projectId",
+          "userId"
+        ]
+      },
+      "WorkLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Work log ID"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Date of work"
+          },
+          "startTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Start time of work"
+          },
+          "endTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "End time of work"
+          },
+          "hoursWorked": {
+            "type": "number",
+            "description": "Hours worked"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of work done"
+          },
+          "taskId": {
+            "type": "string",
+            "description": "Task ID if work is related to a specific task"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Creation timestamp"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Last update timestamp"
+          },
+          "calculatedCost": {
+            "type": "number",
+            "description": "Calculated cost based on project hourly rate"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "startTime",
+          "hoursWorked",
+          "description",
+          "projectId",
+          "userId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateWorkLogDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateTaskDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Task title",
+            "example": "Implement user authentication"
+          },
+          "description": {
+            "type": "string",
+            "description": "Task description",
+            "example": "Create login and registration functionality"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "TODO",
+              "IN_PROGRESS",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "description": "Task status",
+            "default": "TODO"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "URGENT"
+            ],
+            "description": "Task priority",
+            "default": "MEDIUM"
+          },
+          "estimatedHours": {
+            "type": "number",
+            "description": "Estimated hours to complete",
+            "example": 8
+          },
+          "actualHours": {
+            "type": "number",
+            "description": "Actual hours worked",
+            "example": 6.5
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          }
+        },
+        "required": [
+          "title",
+          "status",
+          "priority",
+          "projectId",
+          "userId"
+        ]
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Task ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Task title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Task description"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "TODO",
+              "IN_PROGRESS",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "description": "Task status"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "URGENT"
+            ],
+            "description": "Task priority"
+          },
+          "estimatedHours": {
+            "type": "number",
+            "description": "Estimated hours to complete"
+          },
+          "actualHours": {
+            "type": "number",
+            "description": "Actual hours worked"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Project ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Creation timestamp"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Last update timestamp"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "status",
+          "priority",
+          "projectId",
+          "userId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "UpdateTaskDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "GenerateForecastDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "Forecast": {
+        "type": "object",
+        "properties": {}
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "User": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+}

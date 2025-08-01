@@ -1,0 +1,135 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  hourlyRate  Float    @map("hourly_rate") // Rate per hour in currency
+  currency    String   @default("USD")
+  status      ProjectStatus @default(ACTIVE)
+  startDate   DateTime? @map("start_date")
+  endDate     DateTime? @map("end_date")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id])
+  workLogs    WorkLog[]
+  tasks       Task[]
+
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+  CANCELLED
+}
+
+model WorkSchedule {
+  id              String            @id @default(uuid())
+  startDate       DateTime @map("start_date")
+  endDate         DateTime @map("end_date")
+  days            Json
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  WorkScheduleDay WorkScheduleDay[] 
+  userId          String @map("user_id")
+  user            User              @relation(fields: [userId], references: [id])
+  workSchedules   User[]            @relation("UserWorkSchedules")
+  
+  @@map("work_schedules")
+}
+
+model WorkScheduleDay {
+  id             String       @id @default(uuid())
+  workScheduleId String @map("work_schedule_id")
+  workSchedule   WorkSchedule @relation(fields: [workScheduleId], references: [id])
+  dayOfWeek      Int @map("day_of_week") // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  startTime      String @map("start_time") // ISO 8601 format
+  endTime        String @map("end_time") // ISO 8601 format
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@map("work_schedule_days")
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String?
+  provider String?
+  providerId String? @map("provider_id")
+  avatar String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  workScheduleId String? @map("work_schedule_id")
+  workSchedules WorkSchedule[] @relation("UserWorkSchedules")
+  projects Project[]
+  workLogs WorkLog[]
+  tasks Task[]
+
+  @@map("users")
+  WorkSchedule WorkSchedule[]
+}
+
+model WorkLog {
+  id          String   @id @default(uuid())
+  date        DateTime
+  startTime   DateTime @map("start_time")
+  endTime     DateTime? @map("end_time")
+  hoursWorked Float    @map("hours_worked")
+  description String
+  taskId      String?  @map("task_id")
+  task        Task?    @relation(fields: [taskId], references: [id])
+  projectId   String   @map("project_id")
+  project     Project  @relation(fields: [projectId], references: [id])
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("work_logs")
+}
+
+model Task {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  status      TaskStatus @default(TODO)
+  priority    TaskPriority @default(MEDIUM)
+  estimatedHours Float?  @map("estimated_hours")
+  actualHours    Float?  @map("actual_hours")
+  projectId   String     @map("project_id")
+  project     Project    @relation(fields: [projectId], references: [id])
+  userId      String     @map("user_id")
+  user        User       @relation(fields: [userId], references: [id])
+  workLogs    WorkLog[]
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@map("tasks")
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
