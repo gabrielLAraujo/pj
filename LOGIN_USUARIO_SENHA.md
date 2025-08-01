@@ -6,9 +6,9 @@ O sistema de autenticação com **usuário e senha** já está **COMPLETAMENTE I
 
 ## 🔐 JWT Secret Configurado
 
-✅ **JWT Secret atualizado** com uma chave segura de 128 caracteres:
+✅ **JWT Secret configurado** (substitua pela sua chave segura):
 ```
-2930d4d4755c4a2dc3606756e0cb9c0615cba32defeb989eb38acd65493ebefe24509cfd44e491df2db1218dbfe5151072441a829131bfcbec39504bc8ded85b
+your-super-secret-jwt-key-change-this-in-production
 ```
 
 ## 🚀 Como Usar o Login
@@ -99,7 +99,7 @@ Content-Type: application/json
 ### Variáveis de Ambiente (`.env`):
 ```env
 DATABASE_URL="postgresql://..."
-JWT_SECRET="2930d4d4755c4a2dc3606756e0cb9c0615cba32defeb989eb38acd65493ebefe24509cfd44e491df2db1218dbfe5151072441a829131bfcbec39504bc8ded85b"
+JWT_SECRET="your-super-secret-jwt-key-change-this-in-production"
 ```
 
 ### Configuração JWT:

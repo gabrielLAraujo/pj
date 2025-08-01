@@ -24,12 +24,12 @@ Authorization callback URL: http://localhost:3003/auth/callback
 ### Passo 4: Configurar no .env
 ```bash
 # No arquivo api/.env
-GITHUB_CLIENT_ID="seu_client_id_aqui"
-GITHUB_CLIENT_SECRET="seu_client_secret_aqui"
+GITHUB_CLIENT_ID="your_github_client_id"
+GITHUB_CLIENT_SECRET="your_github_client_secret"
 GITHUB_REDIRECT_URI="http://localhost:3003/auth/callback"
 
 # No arquivo frontend/.env
-REACT_APP_GITHUB_CLIENT_ID="seu_client_id_aqui"
+REACT_APP_GITHUB_CLIENT_ID="your_github_client_id"
 ```
 
 ---
@@ -81,11 +81,11 @@ REACT_APP_GITHUB_CLIENT_ID="seu_client_id_aqui"
 ### Passo 6: Configurar no .env
 ```bash
 # No arquivo api/.env
-GOOGLE_CLIENT_ID="seu_client_id_aqui"
-GOOGLE_CLIENT_SECRET="seu_client_secret_aqui"
+GOOGLE_CLIENT_ID="your_google_client_id"
+GOOGLE_CLIENT_SECRET="your_google_client_secret"
 
 # No arquivo frontend/.env
-REACT_APP_GOOGLE_CLIENT_ID="seu_client_id_aqui"
+REACT_APP_GOOGLE_CLIENT_ID="your_google_client_id"
 ```
 
 ---
@@ -98,16 +98,16 @@ REACT_APP_GOOGLE_CLIENT_ID="seu_client_id_aqui"
 DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
 
 # JWT
-JWT_SECRET="sua_chave_secreta_jwt_muito_segura_aqui"
+JWT_SECRET="your-super-secret-jwt-key-change-this-in-production"
 
 # GitHub OAuth
-GITHUB_CLIENT_ID="seu_github_client_id"
-GITHUB_CLIENT_SECRET="seu_github_client_secret"
+GITHUB_CLIENT_ID="your_github_client_id"
+GITHUB_CLIENT_SECRET="your_github_client_secret"
 GITHUB_REDIRECT_URI="http://localhost:3003/auth/callback"
 
 # Google OAuth
-GOOGLE_CLIENT_ID="seu_google_client_id"
-GOOGLE_CLIENT_SECRET="seu_google_client_secret"
+GOOGLE_CLIENT_ID="your_google_client_id"
+GOOGLE_CLIENT_SECRET="your_google_client_secret"
 
 # Server
 PORT=3000
@@ -119,8 +119,8 @@ PORT=3000
 REACT_APP_API_URL=http://localhost:3000
 
 # OAuth Configuration
-REACT_APP_GITHUB_CLIENT_ID="seu_github_client_id"
-REACT_APP_GOOGLE_CLIENT_ID="seu_google_client_id"
+REACT_APP_GITHUB_CLIENT_ID="your_github_client_id"
+REACT_APP_GOOGLE_CLIENT_ID="your_google_client_id"
 REACT_APP_REDIRECT_URI="http://localhost:3003/auth/callback"
 ```
 
